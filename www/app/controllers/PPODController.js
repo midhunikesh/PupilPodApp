@@ -38,7 +38,7 @@ app.controller('PPODController',function($scope,PPODService,$window,$rootScope,$
 				$state.go('eventmenu.mainLanding');
 			}
 			else{
-				onDeviceReady();
+				//onDeviceReady();
 			}
 		});
     };
@@ -123,7 +123,7 @@ app.controller('PPODController',function($scope,PPODService,$window,$rootScope,$
 		$state.go('eventmenu.change_student');
 	}
 	
-	initialize();
+	//initialize();
 });
 
 app.run(function($rootScope) {
@@ -177,11 +177,11 @@ app.directive("dropdown", function($rootScope,sharedProperties) {
 });
 
 app.controller('loginController',function($scope,PPODService,$http,$window,$document,sharedProperties,myCache,$q,$state,$ionicSideMenuDelegate,$timeout){
-	$scope.loading = true;
+	//$scope.loading = true;
 	$scope.$on('$ionicView.enter', function(){
-		$scope.loading = true;
+		//$scope.loading = true;
 		$ionicSideMenuDelegate.canDragContent(false);
-		$scope.fnInit();
+		//$scope.fnInit();
 		if($ionicSideMenuDelegate.isOpenLeft()){
 			$ionicSideMenuDelegate.toggleLeft();
 		}
@@ -205,7 +205,7 @@ app.controller('loginController',function($scope,PPODService,$http,$window,$docu
 			return false;
 		}
 		else{
-			$scope.loading = true;		
+			//$scope.loading = true;		
 			var regkey = sharedProperties.getRegKey();
 			var usernameTemp = sharedProperties.getUserName();
 			var passwordTemp = sharedProperties.getPassWord();
@@ -227,7 +227,7 @@ app.controller('loginController',function($scope,PPODService,$http,$window,$docu
 		}
     }
 	$scope.submit = function(form) {
-		$scope.loading = true;
+		//$scope.loading = true;
 		$scope.submitted = true;
 		$scope.login.registration_key = sharedProperties.getRegKey();
 		$scope.login.app_id = sharedProperties.getAppId();
@@ -303,7 +303,7 @@ app.controller('changeStudent',function($scope,PPODService,$http,$window,$docume
 });
 
 app.controller('mainController',function($scope,PPODService,$http,$window,$document,sharedProperties,myCache,$ionicSideMenuDelegate,$timeout,$state){
-	$scope.loading = true;
+	//$scope.loading = true;
 	$scope.$on('$ionicView.enter', function(){
 		if($ionicSideMenuDelegate.isOpenLeft()){
 			$ionicSideMenuDelegate.toggleLeft();
@@ -312,8 +312,8 @@ app.controller('mainController',function($scope,PPODService,$http,$window,$docum
 		if(sharedProperties.getIsLogin() == false){
 			$scope.$emit('loginStatus', param);
 		}
-		$scope.loading = true;
-		$scope.fnInit();
+		//$scope.loading = true;
+		//$scope.fnInit();
 		
 	});
 	$scope.$on('$ionicView.leave', function(){

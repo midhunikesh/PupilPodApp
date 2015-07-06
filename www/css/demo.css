@@ -458,3 +458,12 @@ input.scrollable-header {
 	border-bottom-right-radius:4px;
 }
 
+.yellowbar{
+	background-color:#F4CA31;
+}
+.pinkbar{
+	background-color:#D27180;
+}
+.greenbar{
+	background-color:#A1C735;
+}

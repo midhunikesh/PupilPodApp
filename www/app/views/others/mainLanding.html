@@ -3,28 +3,73 @@
 		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
 		<div ng-show="!loading">
 			<div class="card">
-				<div class="item item-divider" style="background-color:#F4CA31;">
+				<div class="item item-divider yellowbar">
 					<div class="row" style="padding:0px;">
 					<div style="width:100%">Messages</div><i style="float:right" class="icon ion-chevron-right"></i>
 					</div>
 				</div>
 				<div class="item item-text-wrap" style="padding:0px;">
-					<div class="card">
-						<div class="text-center" style="padding:0px 5px;">Welcome to pupilpod App</div>
-						<p class="text-center"><small>08 - July - 2015 10:30 AM</small></p>
-					</div>	
-					<div class="card">
-						<div class="text-center" style="padding:0px 5px;">Tomorrow is holiday, enjoy :)</div>
-						<p class="text-center"><small>07 - July - 2015 8:30 AM</small></p>
-					</div>	
-					<div class="card">
-						<div class="text-center" style="padding:0px 5px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </div>
-						<p class="text-center"><small>05 - July - 2015 12:30 AM</small></p>
-					</div>	
+					<div class="card" ng-if="!messageDisplay">
+						<div class="text-center" style="padding:0px 5px;">We don't have any notifications to show you.</div>
+						<p class="text-center"><small>-/-/-</small></p>
+					</div>
+					<div class="card" ng-repeat="details in messageDashboard">
+						<div class="text-center" style="padding:0px 5px;">{{details.notify_msg}}</div>
+						<p class="text-center"><small>{{details.notify_date}}</small></p>
+					</div>
 				</div>
 			</div>
 			<div class="card">
-				<div class="item item-divider" style="background-color:#D27180;">
+				<div class="item item-divider pinkbar">
+					<div class="row" style="padding:0px;">
+					<div style="width:100%">Attendance</div><i style="float:right" class="icon ion-chevron-right"></i>
+					</div>
+				</div>
+				<div class="item item-text-wrap" style="padding:0px;">
+					<div style="background-color:#488ECF;padding-bottom:10px;text-align:center;">
+						<div style="color:#FFFFFF;" class="text-center"><small>Attendance Percentage</small></div>
+						<div class="h1" style="color:#FFFFFF;margin:0px;">{{attendanceDashboard}}%</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="item item-divider greenbar">
+					<div class="row" style="padding:0px;">
+					<div style="width:100%">Calender</div><i style="float:right" class="icon ion-chevron-right"></i>
+					</div>
+				</div>
+				<div class="item item-text-wrap" style="padding:0px;">
+					<div class="row" style="margin-bottom:5px;" ng-if="cal_of_eventDashboard.length == null">
+						<div class="card text-center" style="margin:0px;padding:10px;width:100%;">
+							No calender events found.
+						</div>
+					</div>
+					<div class="row" style="margin-bottom:5px;" ng-repeat="details in cal_of_eventDashboard">
+						<div class="calenderDateCell">
+							<div class="calenderMonth">{{details.cal_month}}</div>
+							<div class="calenderDate">{{details.cal_date}}</div>
+						</div>
+						<div class="card" style="margin:0px;padding-left:5px;width:100%;padding-top:5px;">
+							{{details.name}}
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="card">
+				<div class="item item-divider yellowbar">
+					<div class="row" style="padding:0px;">
+					<div style="width:100%">Fees</div><i style="float:right" class="icon ion-chevron-right"></i>
+					</div>
+				</div>
+				<div class="item item-text-wrap" style="padding:0px;">
+					<div style="background-color:#21573C;padding-bottom:10px;text-align:center;">
+						<div style="color:#FFFFFF;" class="text-center"><small>Fees Pending</small></div>
+						<div class="h1" style="color:#FFFFFF;margin:0px;">&#x20B9;{{feesDashboard.fees_amount}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="item item-divider pinkbar">
 					<div class="row" style="padding:0px;">
 					<div style="width:100%">Program</div><i style="float:right" class="icon ion-chevron-right"></i>
 					</div>
@@ -37,69 +82,7 @@
 				</div>
 			</div>
 			<div class="card">
-				<div class="item item-divider" style="background-color:#A1C735;">
-					<div class="row" style="padding:0px;">
-					<div style="width:100%">Calender</div><i style="float:right" class="icon ion-chevron-right"></i>
-					</div>
-				</div>
-				<div class="item item-text-wrap" style="padding:0px;">
-					<div class="row" style="margin-bottom:5px;">
-						<div class="calenderDateCell">
-							<div class="calenderMonth">Aug</div>
-							<div class="calenderDate">31</div>
-						</div>
-						<div class="card" style="margin:0px;padding-left:5px;width:100%;padding-top:5px;">
-							There will be a seminar on the topic "Organic Farming" on August 31.
-						</div>
-					</div>
-					<div class="row" style="margin-bottom:5px;">
-						<div class="calenderDateCell">
-							<div class="calenderMonth">Aug</div>
-							<div class="calenderDate">06</div>
-						</div>
-						<div class="card" style="margin:0px;padding-left:5px;width:100%;padding-top:5px;">
-							Your quarterly examinations starts from August 16th onwards.
-						</div>
-					</div>
-					<div class="row" style="margin-bottom:5px;">
-						<div class="calenderDateCell">
-							<div class="calenderMonth">May</div>
-							<div class="calenderDate">25</div>
-						</div>
-						<div class="card" style="margin:0px;padding-left:5px;width:100%;padding-top:5px;">
-							Annual day celebrations starts from 25th May 2015 9:30 AM onwards.
-						</div>
-					</div>
-				</div>
-			</div>	
-			<div class="card">
-				<div class="item item-divider" style="background-color:#F4CA31;">
-					<div class="row" style="padding:0px;">
-					<div style="width:100%">Fees</div><i style="float:right" class="icon ion-chevron-right"></i>
-					</div>
-				</div>
-				<div class="item item-text-wrap" style="padding:0px;">
-					<div style="background-color:#21573C;padding-bottom:10px;text-align:center;">
-						<div style="color:#FFFFFF;" class="text-center"><small>Fees Pending</small></div>
-						<div class="h1" style="color:#FFFFFF;margin:0px;">$5720</div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="item item-divider" style="background-color:#D27180;">
-					<div class="row" style="padding:0px;">
-					<div style="width:100%">Attendance</div><i style="float:right" class="icon ion-chevron-right"></i>
-					</div>
-				</div>
-				<div class="item item-text-wrap" style="padding:0px;">
-					<div style="background-color:#488ECF;padding-bottom:10px;text-align:center;">
-						<div style="color:#FFFFFF;" class="text-center"><small>Attendance Percentage</small></div>
-						<div class="h1" style="color:#FFFFFF;margin:0px;">76%</div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="item item-divider" style="background-color:#A1C735;">
+				<div class="item item-divider greenbar">
 					<div class="row" style="padding:0px;">
 					<div style="width:100%">Profile</div><i style="float:right" class="icon ion-chevron-right"></i>
 					</div>

@@ -152,7 +152,7 @@ app.service('sharedProperties', function () {
 	var passWord = '';
 	var instName = '';
 	var parOrStu = '';
-	var isLogin = true;
+	var isLogin = false;
 	var login_entity_guid = '';
 	var app_id = '';
 	var student_guid = '';

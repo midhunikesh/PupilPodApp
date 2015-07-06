@@ -11,10 +11,14 @@
 	</ion-side-menu-content> 
 	
 	<ion-side-menu side="left">
-		<ion-header-bar class="bar-assertive">
-			<h1 class="title">{{student_name}}</h1>
-		</ion-header-bar>
 		<ion-content>
+			<div>
+				<div class="row">
+					<img src="{{studentImage}}" alt="Image" style="height:50px;width:50px;"/>
+					<div class="h3" style="padding-left:5px;">Midhun</div>
+				</div>	
+				<!--<h1 class="title">{{student_name}}</h1>-->
+			</div>
 			<ul class="list">
 				<li>
 					<a class="item" href="#/eventmenu/mainLanding" ng-click="toggleLeft()"><i class="icon ion-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</a>

@@ -1,0 +1,94 @@
+<ion-view view-title="PupilPod">
+	<ion-content>
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+		<div ng-show="!loading">
+			<div class="card">
+				<div class="item item-divider" style="background-color:#F4CA31;">
+					Messages
+				</div>
+				<div class="item item-text-wrap">
+					<div class="list">
+						<div class="item" ng-repeat="details in messageDashboard">
+							<div class="row">
+								<div class="col">{{details.notify_msg}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="item item-divider" style="background-color:#D27180;">
+					Program
+				</div>
+				<div class="item item-text-wrap">
+					<div class="item" ng-repeat="details in programDashboard">
+						<div class="row">
+							<div class="col col-50">{{details.key}}</div>
+							<div class="col col-50">{{details.value}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="item item-divider" style="background-color:#93A862;">
+					Calender
+				</div>
+				<div class="item item-text-wrap">
+					<div class="list">
+						<div class="item" ng-repeat="details in cal_of_eventDashboard">
+							<div class="row">
+								<div class="col col-25">{{details.start_date}}</div>
+								<div class="col col-75">{{details.name}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="card">
+				<div class="item item-divider" style="background-color:#F4CA31;">
+					Attendance
+				</div>
+				<div class="item item-text-wrap">
+					<div class="row">
+						<div class="col col-75">Attendance %</div>
+						<div class="col col-25">{{attendanceDashboard}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="item item-divider" style="background-color:#D27180;">
+					Fees
+				</div>
+				<div class="item item-text-wrap">
+					<div class="item" ng-if="feesDashboard.fees_pending == 'Y'">
+						<div class="col col-50">Fees Pending</div>
+						<div class="col col-50">{{feesDashboard.fees_amount}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="item item-divider" style="background-color:#93A862;">
+					Profile
+				</div>
+				<div class="item item-text-wrap">
+					<div class="list">
+						<div class="item" ng-repeat="details in studentDetails">
+							<div class="row">
+								<div class="col col-50">{{details.key}}</div>
+								<div class="col col-50">{{details.value}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+		</div>
+		<div ng-show="loading">
+			<div style="text-align: center;  margin-bottom: 40px !important;">
+				<ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner>
+				Please wait ...
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

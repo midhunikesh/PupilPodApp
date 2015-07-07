@@ -3,14 +3,15 @@
 		<ion-refresher on-refresh="doRefresh()"></ion-refresher>		
 		<div class="list">
 			<div class="item item-divider">
-				Test Details
+				Examinations
 			</div>
-			<div class="item" ng-repeat="details in studentTestDetails">
-				<div class="row">
-					<div class="col col-50">{{details.test_name}}</div>
-					<div class="col">{{details.test_code}}</div>
-					<div class="col"><a ng-click="goToDetails(details.test_instance_guid)">Details<i class="ion-plus-circled"></i></a></div>
-				</div>
+			<div class="row row-center card">
+				<div class="col col-90">Blalalala</div>
+				<div class="col"><a ng-click="goToDetails(details.test_instance_guid)"><i class="icon ion-chevron-right listNextArrow"></i></a></div>
+			</div>
+			<div class="row row-center card" ng-repeat="details in studentTestDetails" >
+				<div class="col col-90">{{details.test_name}}</div>
+				<div class="col"><a ng-click="goToDetails(details.test_instance_guid)"><i class="icon ion-chevron-right listNextArrow"></i></a></div>
 			</div>
 		</div>
 	</ion-content>

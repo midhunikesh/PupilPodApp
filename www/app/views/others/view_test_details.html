@@ -2,32 +2,12 @@
 	<ion-content>
 		<ion-refresher on-refresh="doRefresh()">	 
 		</ion-refresher>
-		<div class="list">			
-			<div class="item item-divider">
-				{{testName}}&nbsp;-&nbsp;[&nbsp;{{testCode}}&nbsp;]
-			</div>
-			<div class="item">
-				<table>
-					<thead>
-						<tr>
-							<th>Subject Name</th>
-							<th>Skill Name</th>
-							<th>Marks</th>
-							<th>Grade</th>
-							<!--<th>Remarks</th>-->
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="details in studentTestMarks">
-							<td>{{details.subject_name}}</td>
-							<td>{{details.skill_name}}</td>
-							<td>{{details.marks_obtained}}</td>
-							<td>{{details.grade_obtained}}</td>
-							<!--<td>{{details.remarks}}</td>-->
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		<div class="item item-divider">
+			{{testName}}
+		</div>
+		<div class="row row-center card" ng-repeat="details in studentTestMarks">
+			<div class="col col-80" style="border-right:solid 2px #EFEFEF;">{{details.subject_name}}</div>
+			<div class="col col-20">{{details.marks_obtained}}</div>
 		</div>
 	</ion-content>
 </ion-view>

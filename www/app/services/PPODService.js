@@ -217,7 +217,16 @@ app.service('PPODService',function($http,url,$window,$timeout,sharedProperties,$
 				$scope.studentImage = "http://"+sharedProperties.getInstName()+"/"+data.photo;
 				$scope.studentDetails = data.all_other;
 				$scope.programDashboard = data.program_details;
+				$scope.messageDashboard = myCache.get('messageDashboard');
+				if($scope.messageDashboard == null || $scope.messageDashboard.length == 0)
+					$scope.messageDisplay = false;
+				else
+					$scope.messageDisplay = true;
 				$scope.cal_of_eventDashboard = data.coe_details;
+				if($scope.cal_of_eventDashboard == null || $scope.cal_of_eventDashboard.length == 0)
+					$scope.calenderDisplay = false;
+				else
+					$scope.calenderDisplay = true;
 				$scope.attendanceDashboard = data.attendance_details;
 				$scope.feesDashboard = data.fees_details;
 				myCache.put('studentDetails', data.all_other);

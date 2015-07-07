@@ -331,8 +331,16 @@ app.controller('mainController',function($scope,PPODService,$http,$window,$docum
 				else{
 					$scope.loading = false;
 					$scope.messageDashboard = myCache.get('messageDashboard');
+					if($scope.messageDashboard == null || $scope.messageDashboard.length == 0)
+						$scope.messageDisplay = false;
+					else
+						$scope.messageDisplay = true;
 					$scope.programDashboard = myCache.get('programDashboard');
 					$scope.cal_of_eventDashboard = myCache.get('cal_of_eventDashboard');
+					if($scope.cal_of_eventDashboard == null || $scope.cal_of_eventDashboard.length == 0)
+						$scope.calenderDisplay = false;
+					else
+						$scope.calenderDisplay = true;
 					$scope.attendanceDashboard = myCache.get('attendanceDashboard');
 					$scope.feesDashboard = myCache.get('feesDashboard');
 					$scope.studentDetails = myCache.get('studentDetails');

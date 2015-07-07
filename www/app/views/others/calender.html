@@ -1,0 +1,42 @@
+<ion-view view-title="Pupilpod" ng-controller="CalenderController" >
+    <ion-content class="padding">
+        <div ng-show="!loading">
+            <div class="card">
+                <div class="item item-text-wrap">
+                    Calender Events
+                </div>
+            </div>
+			<style>
+			table, th , td  {
+				padding: 10px;
+				border-bottom:solid 1px;
+				border-collapse: collapse;
+				table-layout: fixed;
+			}
+			</style>
+            <div style="width:100%;margin:auto; text-align:center;">
+				<button id="prev" class="button button-assertive"  ng-click="prev()" style="color:black;font-weight:bold;">PREV</button>
+				<span style="width:250px;display: inline-block;margin:auto;text-align:center;padding-top:15px;font-size:20px">{{monthyear}}</span>
+				<button id="next" class="button button-assertive" ng-click="next()" style="color:black;font-weight:bold;">NEXT</button>
+            </div>
+            <br/><br/>
+			<table ng-table width="100%" class="table" >
+				<tr>
+					<th style="text-align:center">Date</th>
+					<th style="text-align:center">Name</th>
+					<th style="text-align:center" >Category</th>
+					<th style="text-align:center" >Details</th>
+				</tr>
+				<tr ng-repeat="event in events">
+					<td data-title="'Date'" style="text-align:center" >{{event.date}}</td>
+					<td data-title="'Name'" style="text-align:center">{{event.name}}</td>
+					<td data-title="'Category'" style="text-align:center">{{event.category}}</td>
+					<td data-title="'Details'" style="text-align:center"><button class="button button-assertive" ng-click="fnViewDetails(event)">View Details </button></td>
+				</tr>
+				<tr>
+					<td colspan='4' style="text-align:center" ng-if='fail'>{{fail}}
+				</td>
+			</table>
+        </div>
+	</ion-content>
+</ion-view>

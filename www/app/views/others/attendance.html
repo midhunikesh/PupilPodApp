@@ -1,0 +1,39 @@
+<ion-view view-title="Pupilpod" ng-controller="AttendanceController" ng-init="fnInit()">
+    <ion-content class="padding">
+        <div ng-show="!loading">
+            <div class="card">
+                <div class="item item-text-wrap">
+                    Attendance
+                </div>
+            </div>
+			<style>
+			table, th , td  {
+				padding: 10px;
+				border-bottom:solid 1px;
+				border-collapse: collapse;
+				table-layout: fixed;
+			}
+			</style>
+			<div style="width:100%;margin:auto; text-align:center;">
+				<button id="prev" class="button button-assertive"  ng-click="prev()" style="color:black;font-weight:bold;">PREV</button>
+				<span style="width:250px;display: inline-block;margin:auto;text-align:center;padding-top:15px;font-size:20px">{{monthyear}}	</span>
+				<button id="next" class="button button-assertive" ng-click="next()" style="color:black;font-weight:bold;">NEXT</button>
+            </div>
+            <br/><br/>
+			<table ng-table width="100%" class="table" >
+						<tr>
+						<th style="text-align:center">SLOT</th>
+						<th style="text-align:center">Date</th>
+						<th style="text-align:center" ng-if='type'>Subject</th>
+						</tr>
+						<tr ng-repeat="attendance in attendances">
+							<td data-title="'Slot'" style="text-align:center" >{{attendance.slot}}</td>
+							<td data-title="'Date'" style="text-align:center">{{attendance.date}}</td>
+							<td data-title="'subject'" style="text-align:left" ng-if='attendance.subject'>{{attendance.subject}}</td>
+						</tr>
+						<tr><td colspan='3' style="text-align:center" ng-if='fail && type==1'>{{fail}}</td>
+						<tr><td colspan='2' style="text-align:center"  ng-if='fail && type==0'>{{fail}}</td>
+			</table>
+		</div>
+ </ion-content>
+</ion-view>

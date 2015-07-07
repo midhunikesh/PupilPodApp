@@ -38,7 +38,7 @@ app.controller('PPODController',function($scope,PPODService,$window,$rootScope,$
 				$state.go('eventmenu.mainLanding');
 			}
 			else{
-				//onDeviceReady();
+				onDeviceReady();
 			}
 		});
     };
@@ -123,7 +123,7 @@ app.controller('PPODController',function($scope,PPODService,$window,$rootScope,$
 		$state.go('eventmenu.change_student');
 	}
 	
-	//initialize();
+	initialize();
 });
 
 app.run(function($rootScope) {
@@ -177,11 +177,11 @@ app.directive("dropdown", function($rootScope,sharedProperties) {
 });
 
 app.controller('loginController',function($scope,PPODService,$http,$window,$document,sharedProperties,myCache,$q,$state,$ionicSideMenuDelegate,$timeout){
-	//$scope.loading = true;
+	$scope.loading = true;
 	$scope.$on('$ionicView.enter', function(){
-		//$scope.loading = true;
+		$scope.loading = true;
 		$ionicSideMenuDelegate.canDragContent(false);
-		//$scope.fnInit();
+		$scope.fnInit();
 		if($ionicSideMenuDelegate.isOpenLeft()){
 			$ionicSideMenuDelegate.toggleLeft();
 		}
@@ -205,7 +205,7 @@ app.controller('loginController',function($scope,PPODService,$http,$window,$docu
 			return false;
 		}
 		else{
-			//$scope.loading = true;		
+			$scope.loading = true;		
 			var regkey = sharedProperties.getRegKey();
 			var usernameTemp = sharedProperties.getUserName();
 			var passwordTemp = sharedProperties.getPassWord();
@@ -227,7 +227,7 @@ app.controller('loginController',function($scope,PPODService,$http,$window,$docu
 		}
     }
 	$scope.submit = function(form) {
-		//$scope.loading = true;
+		$scope.loading = true;
 		$scope.submitted = true;
 		$scope.login.registration_key = sharedProperties.getRegKey();
 		$scope.login.app_id = sharedProperties.getAppId();
@@ -303,7 +303,7 @@ app.controller('changeStudent',function($scope,PPODService,$http,$window,$docume
 });
 
 app.controller('mainController',function($scope,PPODService,$http,$window,$document,sharedProperties,myCache,$ionicSideMenuDelegate,$timeout,$state){
-	//$scope.loading = true;
+	$scope.loading = true;
 	$scope.$on('$ionicView.enter', function(){
 		if($ionicSideMenuDelegate.isOpenLeft()){
 			$ionicSideMenuDelegate.toggleLeft();
@@ -312,8 +312,8 @@ app.controller('mainController',function($scope,PPODService,$http,$window,$docum
 		if(sharedProperties.getIsLogin() == false){
 			$scope.$emit('loginStatus', param);
 		}
-		//$scope.loading = true;
-		//$scope.fnInit();
+		$scope.loading = true;
+		$scope.fnInit();
 		
 	});
 	$scope.$on('$ionicView.leave', function(){
@@ -508,4 +508,182 @@ app.controller('studentViewController',function($scope,PPODService,sharedPropert
 		  $scope.$broadcast('scroll.refreshComplete');
 		}, 1000);
     };
+});
+
+app.controller('FeedbackController',function($scope,PPODService,$http,$window,$document,sharedProperties){
+	
+	$scope.FeedbackFormsubmit = function(test) {
+		PPODService.sendFeedBack($scope,sharedProperties);
+		return false;
+	};
+    
+});
+
+app.controller('AttendanceController',function($scope,PPODService,$http,$window,$document,sharedProperties){
+    var ref = "";
+    montharr=['January', 'February', 'March', 'April','May','June','July','August','September','October','November','December'];
+    var date = new Date();
+    var currentdate= date.getDate();
+    var  currentmonth= date.getMonth();
+    var currentyear= date.getFullYear();
+    $scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
+    $scope.month=currentmonth;
+    $scope.year=currentyear;
+    defaultmonth=currentmonth;
+    defaultyear=currentyear;
+    PPODService.getAttendance($scope,sharedProperties);
+    
+    $scope.prev = function(){
+		if(currentmonth==0)
+		{
+			currentmonth=11;
+			currentyear=currentyear-1;
+		}
+		else
+		{
+			currentmonth=currentmonth-1;
+		}
+		$scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
+		$scope.currentmonth=currentmonth;
+		$scope.currentyear=currentyear;
+		$scope.month=currentmonth;
+		$scope.year=currentyear;
+		PPODService.getAttendance($scope,sharedProperties);
+    };
+
+    $scope.next = function(){
+		if(new Date(currentyear,currentmonth,1)< new Date(defaultyear,defaultmonth,1))
+		{
+			if(currentmonth==11)
+			{
+				currentmonth=0;
+				currentyear=currentyear+1;
+			}
+			else
+			{
+				currentmonth=currentmonth+1;
+			}			 
+		}         
+    
+		$scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
+		$scope.currentmonth=currentmonth;
+		$scope.currentyear=currentyear;
+		$scope.month=currentmonth;
+		$scope.year=currentyear;
+		PPODService.getAttendance($scope,sharedProperties);
+    }
+});
+
+app.controller('transportDetails',function($scope,PPODService,$http,sharedProperties,$ionicSideMenuDelegate){
+		$ionicSideMenuDelegate.canDragContent(false);
+		$scope.spinning = true;
+		$scope.$on('$ionicView.enter', function(){
+			$scope.fnInit();
+		});
+	$scope.fnInit=function fnInit(){
+		PPODService.getStudentTransportDetails($scope,sharedProperties);
+	}
+});
+
+app.controller('CalenderController',function($scope,PPODService,$http,$window,$document,sharedProperties,$ionicSideMenuDelegate,$timeout,$location){
+    var ref = "";
+    montharr=['January', 'February', 'March', 'April','May','June','July','August','September','October','November','December'];
+	if(sharedProperties.getMonth()=='' && sharedProperties.getYear()==''){
+		var date = new Date();
+		var currentdate= date.getDate();
+		var  currentmonth= date.getMonth();
+		var currentyear= date.getFullYear();
+	}
+    else{
+        var  currentmonth= sharedProperties.getMonth();
+		var currentyear= sharedProperties.getYear();
+    }
+    $scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
+    $scope.month=currentmonth;
+    $scope.year=currentyear;
+    defaultmonth=currentmonth;
+    defaultyear=currentyear;
+    PPODService.getCalenderEvents($scope,sharedProperties);
+    $scope.prev = function(){
+		if(currentmonth==0)
+		{
+			currentmonth=11;
+			currentyear=currentyear-1;
+		}
+		else
+		{
+			currentmonth=currentmonth-1;
+		}
+		$scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
+		$scope.currentmonth=currentmonth;
+		$scope.currentyear=currentyear;
+		$scope.month=currentmonth;
+		$scope.year=currentyear;
+		PPODService.getCalenderEvents($scope,sharedProperties);
+	};
+
+	$scope.next = function(){
+        if(currentmonth==11)
+        {
+			currentmonth=0;
+			currentyear=currentyear+1;
+        }
+        else
+        {
+			currentmonth=currentmonth+1;
+        }
+		$scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
+		$scope.currentmonth=currentmonth;
+		$scope.currentyear=currentyear;
+		$scope.month=currentmonth;
+		$scope.year=currentyear;
+		PPODService.getCalenderEvents($scope,sharedProperties);
+    }
+    $scope.fnViewDetails = function(row){
+        sharedProperties.setMonth($scope.month);
+        sharedProperties.setYear($scope.year);
+        sharedProperties.setEventRow(row);
+		var path = "/eventmenu/event_details";
+        $location.path(path);
+    }
+}); 
+
+app.controller('EventDetailController',function($scope,PPODService,sharedProperties){
+    fnInit();
+    function fnInit(){
+        $scope.event=sharedProperties.getEventRow();
+    }
+});
+
+app.controller('PublicationController',function($scope,$window,PPODService,sharedProperties,$location){
+    $scope.fnInit = function(){
+        $scope.loading = true;
+        var promise = PPODService.getPublications();
+        promise.then(function(result) {
+            $scope.loading = false;
+            $scope.publications = result;
+
+        }, function(reason) {
+            $scope.loading = false;
+            alert(reason);
+        });
+    }
+    $scope.fnViewDetails = function(row){
+        sharedProperties.setPublicationRow(row);
+        $location.path("/eventmenu/publication_details");
+    }
+});
+app.controller('PublicationDetailController',function($scope,PPODService,sharedProperties){
+    fnInit();
+    function fnInit(){
+        var promise = PPODService.getPublicationDetails(sharedProperties.getPublicationRow());
+        promise.then(function(result) {
+            $scope.loading = false;
+            $scope.publication_details = result.publication_details;
+            $scope.publication_attachments = result.publication_attachments;
+        }, function(reason) {
+            $scope.loading = false;
+            alert(reason);
+        });
+    }
 });

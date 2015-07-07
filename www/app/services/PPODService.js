@@ -4,7 +4,7 @@
 **/
 
 
-app.service('PPODService',function($http,url,$window,$timeout,sharedProperties,$cordovaPush,$rootScope,$state,myCache,$ionicPopup,$cordovaSQLite){    
+app.service('PPODService',function($http,url,$window,$timeout,sharedProperties,$cordovaPush,$rootScope,$state,myCache,$ionicPopup,$cordovaSQLite,$q){    
 	this.dbConnection = function($scope,sharedProperties){
 		var shortName = 'tnet_pupilpod';
 		var version = '1.0';
@@ -405,4 +405,154 @@ app.service('PPODService',function($http,url,$window,$timeout,sharedProperties,$
 			//transaction.executeSql('INSERT INTO tnet_notification_details(notify_guid,notify_date,notify_type,notify_msg,entity_guid) VALUES (?,?,?,?,?)',[notificationDetails.entity_instance_guid,t_Date, notificationDetails.notify_type, notificationDetails.notify_msg,notificationDetails.entity_guid],nullHandler,errorHandlerQuery);		
 		},errorHandlerTransaction,nullHandler);
 	};
+	
+	this.sendFeedBack = function($scope,sharedProperties){
+		var param = JSON.stringify({
+			"serviceName":"TnetMobileService", 
+			"methodName":"sendFeedBack",
+			"parameters":[null,{'user_id' : sharedProperties.getAppId(),'student_guid': sharedProperties.getStudentSelectedGuid(),	'category': $scope.category,'email': $scope.email,'message': $scope.message}]
+        });
+		var tempUrl = "http://"+sharedProperties.getInstName()+"/"+url;
+		//var tempUrl = "http://hestage.pupilpod.in/"+url;
+		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+		$http.post(tempUrl, param).success(function(data, status, headers, config) {
+			if(data.valid == 'VALID'){
+				$scope.loading = false;
+				$scope.emailsent = data.emailsent;
+			}
+			else{
+				$scope.loading = false;
+			}
+		})
+		.error(function(data, status, headers, config){
+			$scope.loading = false;
+			alert('Please give instance name correct,Wrong Instance Name. eg: xyz.pupilpod.in');
+			return false;
+		});
+	};
+	
+	this.getAttendance = function($scope,sharedProperties){
+		var param = JSON.stringify({
+			"serviceName":"TnetMobileService", 
+			"methodName":"getAttendance",
+			"parameters":[null,{'user_id' : sharedProperties.getAppId(),'student_guid': sharedProperties.getStudentSelectedGuid(),'month': $scope.month,'year': $scope.year}]
+        });
+		var tempUrl = "http://"+sharedProperties.getInstName()+"/"+url;
+		//var tempUrl = "http://hestage.pupilpod.in/"+url;
+		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+		$http.post(tempUrl, param).success(function(data, status, headers, config) {
+			if(data.valid == 'VALID'){
+				$scope.loading = false;
+				$scope.attendances = data.attendances;
+				$scope.fail=data.fail;
+				$scope.type=data.type;
+			}
+			else{
+				$scope.loading = false;
+			}
+		})
+		.error(function(data, status, headers, config){
+			$scope.loading = false;
+			alert('Please give instance name correct,Wrong Instance Name. eg: xyz.pupilpod.in');
+			return false;
+		});
+	};
+	
+	this.getStudentTransportDetails = function($scope,sharedProperties){
+		var param = JSON.stringify({
+			"serviceName":"TnetMobileService", 
+			"methodName":"getStudentTransportDetails",
+			"parameters":[null,{'student_guid': sharedProperties.getStudentSelectedGuid(),'user_guid':sharedProperties.getUserGuid()}]
+		});
+		
+		//var tempUrl = "http://hestage.pupilpod.in"+"/"+url;
+		var tempUrl = "http://"+sharedProperties.getInstName()+"/"+url;
+		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+		
+		$http.post(tempUrl, param).success(function(data, status, headers, config) {
+			if(data.valid == 'VALID'){
+			
+				$scope.loading = false;
+				$scope.routeDetails = data.routeDetails;
+			}
+			else{
+				$scope.loading = false;
+			}
+		})
+		.error(function(data, status, headers, config){
+			$scope.loading = false;
+			alert('Please give instance name correct,Wrong Instance Name. eg: xyz.pupilpod.in');
+			return false;
+		});
+	};
+	
+	this.getCalenderEvents = function($scope,sharedProperties){
+		var param = JSON.stringify({
+			"serviceName":"TnetMobileService", 
+			"methodName":"getCalenderEvents",
+			"parameters":[null,{'user_id' : sharedProperties.getAppId(),'student_guid': sharedProperties.getStudentSelectedGuid(),'month': $scope.month,'year': $scope.year}]
+        });
+		var tempUrl = "http://"+sharedProperties.getInstName()+"/"+url;
+		//var tempUrl = "http://hetest.pupilpod.in/"+url;
+		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+		$http.post(tempUrl, param).success(function(data, status, headers, config) {
+			if(data.valid == 'VALID'){
+				$scope.loading = false;
+				$scope.events = data.events;
+				$scope.fail=data.fail;
+				$scope.type=data.type;
+			}
+			else{
+				$scope.loading = false;
+			}
+		})
+		.error(function(data, status, headers, config){
+			$scope.loading = false;
+			alert('Please give instance name correct,Wrong Instance Name. eg: xyz.pupilpod.in');
+			return false;
+		});
+	};
+	this.getPublications = function(){
+        var param = JSON.stringify({
+            "serviceName":"TnetMobileService",
+            "methodName":"getPublications",
+            "parameters":[null,{'user_id' : sharedProperties.getAppId(),'student_guid': sharedProperties.getStudentSelectedGuid() }]
+        });
+
+        var tempUrl = "http://"+sharedProperties.getInstName()+"/"+url;
+        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+        var deferred = $q.defer();
+        $http.post(tempUrl, param).success(function(data,status, headers, config) {
+            deferred.resolve(data);
+        })
+        .error(function(data,status, headers, config){
+            deferred.reject("Please give instance name correct,Wrong Instance Name. eg: xyz.pupilpod.in");
+        });
+        return deferred.promise;
+    };
+
+    this.getPublicationDetails = function(row){
+        var pubobj = new Object();
+        pubobj['pG']  = row.pG;
+        pubobj['piG'] = row.piG;
+        var param = JSON.stringify({
+            "serviceName":"TnetMobileService",
+            "methodName":"getPublicationDetails",
+            "parameters":[null,{'user_id' : sharedProperties.getAppId(),'student_guid': sharedProperties.getStudentSelectedGuid(),'pubobj':pubobj }]
+        });
+        var tempUrl = "http://"+sharedProperties.getInstName()+"/"+url;
+        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+        var deferred = $q.defer();
+        $http.post(tempUrl, param).success(function(data) {
+            deferred.resolve(data);
+        })
+        .error(function(data){
+            deferred.reject("Please give instance name correct,Wrong Instance Name. eg: xyz.pupilpod.in");
+        });
+        return deferred.promise;
+    };
+	
 });
+
+
+

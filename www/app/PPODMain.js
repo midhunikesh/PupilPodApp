@@ -134,6 +134,73 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 			}
 		}
     })
+	.state('eventmenu.user_feedback', {
+		cache: false,
+		url: "/user_feedback",
+		views: {
+			'menuContent' :{
+				templateUrl: 'app/views/others/user_feedback.html',
+				controller: ""
+			}
+		}
+    })
+	.state('eventmenu.attendance', {
+		cache: false,
+		url: "/attendance",
+		views: {
+			'menuContent' :{
+			  templateUrl: 'app/views/others/attendance.html',
+			  controller: "AttendanceController"
+			}
+		}
+    })
+	.state('eventmenu.transportDetails', {
+		url: "/transportDetails",
+		views: {
+			'menuContent' :{
+				templateUrl: 'app/views/others/transportDetails.html',
+				controller: "transportDetails"
+			}
+		}
+	})
+	.state('eventmenu.event_details', {
+		cache: false,
+		url: "/event_details",
+		views: {
+			'menuContent' :{
+				templateUrl: 'app/views/others/event_details.html',
+				controller: ""
+			}
+		}
+    })
+	.state('eventmenu.calender', {
+		cache: false,
+		url: "/calender",
+		views: {
+			'menuContent' :{
+				templateUrl: 'app/views/others/calender.html',
+				controller: ""
+			}
+		}
+    })
+	.state('eventmenu.publications',{
+        url: "/publications",
+        views: {
+            'menuContent' :{
+                templateUrl: 'app/views/others/publication.html',
+                controller:'PublicationController'
+            }
+        }
+    })
+    .state('eventmenu.publication_details',{
+        url: "/publication_details",
+        views: {
+            'menuContent': {
+                templateUrl: 'app/views/others/publication_details.html',
+                controller: 'PublicationDetailController'
+            }
+        }
+    })
 	.state('eventmenu.student_view', {
 		url: "/student_view",
 		views: {
@@ -152,13 +219,16 @@ app.service('sharedProperties', function () {
 	var passWord = '';
 	var instName = '';
 	var parOrStu = '';
-	var isLogin = false;
+	var isLogin = true;
 	var login_entity_guid = '';
 	var app_id = '';
 	var student_guid = '';
 	var student_name = '';
 	var test_instance_guid = '';
 	var dbObj_com = null;
+	var event = new Array();
+	var month='';
+	var year='';
 	return {
 		getRegKey: function() {
 			return reg_key;
@@ -231,6 +301,24 @@ app.service('sharedProperties', function () {
 		},
 		setTestDBConObj: function(dbObj){
 			dbObj_com = dbObj;
-		}
+		},
+		getEventRow: function(){
+			return event;
+		},
+		setEventRow: function(row){
+			event = row;
+		},
+		getMonth: function(){
+            return month;
+        },
+        setMonth: function(row){
+            month = row;
+        },
+        getYear: function(){
+            return year;
+        },
+        setYear: function(row){
+            year = row;
+        }
 	};
 });

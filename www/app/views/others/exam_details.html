@@ -5,10 +5,6 @@
 			<div class="item item-divider">
 				Examinations
 			</div>
-			<div class="row row-center card">
-				<div class="col col-90">Blalalala</div>
-				<div class="col"><a ng-click="goToDetails(details.test_instance_guid)"><i class="icon ion-chevron-right listNextArrow"></i></a></div>
-			</div>
 			<div class="row row-center card" ng-repeat="details in studentTestDetails" >
 				<div class="col col-90">{{details.test_name}}</div>
 				<div class="col"><a ng-click="goToDetails(details.test_instance_guid)"><i class="icon ion-chevron-right listNextArrow"></i></a></div>

@@ -103,6 +103,7 @@ app.controller('PPODController',function($scope,PPODService,$window,$rootScope,$
 	
 	$rootScope.$on('studentChanged',function(event,args){
 		$scope.student_name = args['name'];
+		$scope.studentImage = "http://"+sharedProperties.getInstName()+"/"+myCache.get('studentImage');
 		$state.go('eventmenu.change_student');
 			return false;
 	});

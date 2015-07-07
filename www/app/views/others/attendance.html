@@ -4,17 +4,17 @@
 			<div class="item item-divider">
 				Attendance
 			</div>
-			<div ng-show="!loading">
-				<div class="card">
-					<div class="row row-center">
-						<div><a ng-click="prev()" style="width:80px;float:left;" class="button icon-left ion-chevron-left button-clear button-dark">Prev</a></div>
-						<div class="h4 text-center" style="width:100%;">{{monthyear}}</div>
-						<div><a ng-click="next()" style="width:80px;float:right;" class="button icon-right ion-chevron-right button-clear button-dark">Next</a></div>
-					</div>
+			<div class="card">
+				<div class="row row-center">
+					<div><a ng-click="prev()" style="width:80px;float:left;" class="button icon-left ion-chevron-left button-clear button-dark">Prev</a></div>
+					<div class="h4 text-center" style="width:100%;">{{monthyear}}</div>
+					<div><a ng-click="next()" style="width:80px;float:right;" class="button icon-right ion-chevron-right button-clear button-dark">Next</a></div>
 				</div>
-			</div>	
-			<div ng-show="!loading">
-				<ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner>
+			</div>
+			<div>
+				<div style="text-align: center;">
+					<ion-spinner icon="ripple" class="spinner-balanced"></ion-spinner>
+				</div>
 			</div>
 			<div ng-show="!loading">
 				<div class="text-center" ng-if='!fail'><small>Periods marked as absent</small></div>

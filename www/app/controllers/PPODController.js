@@ -536,6 +536,7 @@ app.controller('AttendanceController',function($scope,PPODService,$http,$window,
     var currentdate= date.getDate();
     var  currentmonth= date.getMonth();
     var currentyear= date.getFullYear();
+	$scope.loading = true;
     $scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
     $scope.month=currentmonth;
     $scope.year=currentyear;
@@ -553,6 +554,7 @@ app.controller('AttendanceController',function($scope,PPODService,$http,$window,
 		{
 			currentmonth=currentmonth-1;
 		}
+		$scope.loading = true;
 		$scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
 		$scope.currentmonth=currentmonth;
 		$scope.currentyear=currentyear;
@@ -574,7 +576,7 @@ app.controller('AttendanceController',function($scope,PPODService,$http,$window,
 				currentmonth=currentmonth+1;
 			}			 
 		}         
-    
+		$scope.loading = true;
 		$scope.monthyear=(montharr[currentmonth]+ ' '+currentyear);
 		$scope.currentmonth=currentmonth;
 		$scope.currentyear=currentyear;

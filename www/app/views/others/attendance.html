@@ -7,18 +7,18 @@
 			<div ng-show="!loading">
 				<div class="card">
 					<div class="row">
-						<div class="col col-10"><a ng-click="prev()" class="button icon-left ion-chevron-left button-clear button-dark listBackArrow">Prev</a></div>
-						<div class="col col-80">{{monthyear}}</div>
-						<div class="col col-10"><a ng-click="next()" class="button icon-left ion-chevron-right button-clear button-dark listNextArrow">Next</a></div>
+						<div class="col col-30"><a ng-click="prev()" class="button icon-left ion-chevron-left button-clear button-dark">Prev</a></div>
+						<div class="col col-40 h4 text-center">{{monthyear}}</div>
+						<div class="col col-30"><a ng-click="next()" class="button icon-right ion-chevron-right button-clear button-dark">Next</a></div>	
 					</div>
 				</div>
-				<div class="text-center"><small>slots / periods marked as absent</small></div>
 				<!--
 				<div style="width:100%;margin:auto; text-align:center;">
 				<button id="prev" class="button button-assertive"  ng-click="prev()" style="color:black;font-weight:bold;">PREV</button>
 				<span style="width:250px;display: inline-block;margin:auto;text-align:center;padding-top:15px;font-size:20px">{{monthyear}}	</span>
 				<button id="next" class="button button-assertive" ng-click="next()" style="color:black;font-weight:bold;">NEXT</button>
 				</div>-->
+				<div class="text-center" ng-if='!fail'><small>slots / periods marked as absent</small></div>
 				<div class="card" ng-repeat="attendance in attendances">
 					<div class="row row-center" ng-if='type == 1'>
 						<div class="col col-20">{{attendance.slot}}</div>

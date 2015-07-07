@@ -60,6 +60,7 @@ app.controller('PPODController',function($scope,PPODService,$window,$rootScope,$
 			$scope.loginTrue = false;
 			$scope.students = myCache.get('students');
 			$scope.student_name = sharedProperties.getStudentSelectedName();
+			$scope.studentImage = "http://"+sharedProperties.getInstName()+"/"+myCache.get('studentImage');
 		}
 		else{
 			$scope.loginTrue = true;

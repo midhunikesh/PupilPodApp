@@ -1,26 +1,41 @@
-<ion-view view-title="Pupilpod" ng-controller="AttendanceController" ng-init="fnInit()">
-    <ion-content class="padding">
-        <div ng-show="!loading">
-            <div class="card">
-                <div class="item item-text-wrap">
-                    Attendance
-                </div>
-            </div>
-			<style>
-			table, th , td  {
-				padding: 10px;
-				border-bottom:solid 1px;
-				border-collapse: collapse;
-				table-layout: fixed;
-			}
-			</style>
-			<div style="width:100%;margin:auto; text-align:center;">
+<ion-view view-title="Pupilpod">
+    <ion-content>
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>	
+			<div class="item item-divider">
+				Attendance
+			</div>
+			<div ng-show="!loading">
+				<div class="card">
+					<div class="row">
+						<div class="col col-10"><a ng-click="prev()" class="button icon-left ion-chevron-left button-clear button-dark listBackArrow">Prev</a></div>
+						<div class="col col-80">{{monthyear}}</div>
+						<div class="col col-10"><a ng-click="next()" class="button icon-left ion-chevron-right button-clear button-dark listNextArrow">Next</a></div>
+					</div>
+				</div>
+				<div class="text-center"><small>slots / periods marked as absent</small></div>
+				<!--
+				<div style="width:100%;margin:auto; text-align:center;">
 				<button id="prev" class="button button-assertive"  ng-click="prev()" style="color:black;font-weight:bold;">PREV</button>
 				<span style="width:250px;display: inline-block;margin:auto;text-align:center;padding-top:15px;font-size:20px">{{monthyear}}	</span>
 				<button id="next" class="button button-assertive" ng-click="next()" style="color:black;font-weight:bold;">NEXT</button>
-            </div>
-            <br/><br/>
-			<table ng-table width="100%" class="table" >
+				</div>-->
+				<div class="card" ng-repeat="attendance in attendances">
+					<div class="row row-center" ng-if='type == 1'>
+						<div class="col col-20">{{attendance.slot}}</div>
+						<div class="col col-30">{{attendance.date}}</div>
+						<div class="col col-50">{{attendance.subject}}</div>
+					</div>
+					<div class="row row-center" ng-if='type == 0'>
+						<div class="col col-20">{{attendance.slot}}</div>
+						<div class="col col-80">{{attendance.date}}</div>
+					</div>
+				</div>
+				<div class="card" ng-if='fail'>
+					<div class="row row-center">
+						<div class="col text-center">{{fail}}</div>
+					</div>	
+				</div>
+				<!--<table ng-table width="100%" class="table" >
 						<tr>
 						<th style="text-align:center">SLOT</th>
 						<th style="text-align:center">Date</th>
@@ -33,7 +48,7 @@
 						</tr>
 						<tr><td colspan='3' style="text-align:center" ng-if='fail && type==1'>{{fail}}</td>
 						<tr><td colspan='2' style="text-align:center"  ng-if='fail && type==0'>{{fail}}</td>
-			</table>
+			</table>-->
 		</div>
  </ion-content>
 </ion-view>

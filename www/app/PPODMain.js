@@ -169,7 +169,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		views: {
 			'menuContent' :{
 				templateUrl: 'app/views/others/event_details.html',
-				controller: ""
+				controller: "EventDetailController"
 			}
 		}
     })
@@ -179,7 +179,7 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 		views: {
 			'menuContent' :{
 				templateUrl: 'app/views/others/calender.html',
-				controller: ""
+				controller: "CalenderController"
 			}
 		}
     })

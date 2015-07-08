@@ -685,7 +685,7 @@ app.controller('PublicationController',function($scope,$window,PPODService,share
         $location.path("/eventmenu/publication_details");
     }
 });
-app.controller('PublicationDetailController',function($scope,PPODService,sharedProperties,handleDocumentWithURL){
+app.controller('PublicationDetailController',function($scope,PPODService,sharedProperties){
     fnInit();
     function fnInit(){
         var promise = PPODService.getPublicationDetails(sharedProperties.getPublicationRow());
@@ -695,14 +695,12 @@ app.controller('PublicationDetailController',function($scope,PPODService,sharedP
             $scope.publication_attachments = result.publication_attachments;
         }, function(reason) {
             $scope.loading = false;
-            alert(reason);
         });
     }
 	$scope.downloadAttachment = function(url){
 		handleDocumentWithURL(
 		  function() {console.log('success');},
 		  function(error) {
-			console.log('failure');
 			if(error == 53) {
 			  console.log('No app that handles this file type.');
 			}

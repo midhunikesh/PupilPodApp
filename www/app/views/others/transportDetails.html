@@ -4,10 +4,10 @@
 			<div class="item item-divider">
 				Transport details
 			</div>
-			<div class="item item-text-wrap" ng-repeat="row in routeDetails">
-				<div class="row">
-					<div style="width:50%;border-right:solid 2px #EFEFEF;">{{row.label}}</div>
-					<div class="text-right" style="width:50%;">{{row.value}}</div>
+			<div class="card" ng-repeat="row in routeDetails">
+				<div class="row row-center">
+					<div class="col col-50" style="border-right:solid 2px #EFEFEF;">{{row.label}}</div>
+					<div class="col col-50">{{row.value}}</div>
 				</div>
 			</div>
 		</div>	

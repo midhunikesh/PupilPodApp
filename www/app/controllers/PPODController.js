@@ -685,7 +685,7 @@ app.controller('PublicationController',function($scope,$window,PPODService,share
         $location.path("/eventmenu/publication_details");
     }
 });
-app.controller('PublicationDetailController',function($scope,PPODService,sharedProperties,$window){
+app.controller('PublicationDetailController',function($scope,PPODService,sharedProperties,handleDocumentWithURL){
     fnInit();
     function fnInit(){
         var promise = PPODService.getPublicationDetails(sharedProperties.getPublicationRow());
@@ -699,17 +699,15 @@ app.controller('PublicationDetailController',function($scope,PPODService,sharedP
         });
     }
 	$scope.downloadAttachment = function(url){
-		var remoteFile = url;
-        var localFileName = remoteFile.substring(url.lastIndexOf('/')+1);
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-            fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
-                var localPath = fileEntry.fullPath;
-                if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-                    localPath = localPath.substring(7);
-                }
-                var ft = new FileTransfer();
-                ft.download(remoteFile,localPath, function(entry) {}, fail);
-            },fail);
-        }, fail);
+		handleDocumentWithURL(
+		  function() {console.log('success');},
+		  function(error) {
+			console.log('failure');
+			if(error == 53) {
+			  console.log('No app that handles this file type.');
+			}
+		  }, 
+		  'http://thoughtnet.pupilpod.in/files/tk12.pupilpod.in/import_uploaded_data/FirstSchool_SectionA-1.xlsx'
+		);
     }	
 });

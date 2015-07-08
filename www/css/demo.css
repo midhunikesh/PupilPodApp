@@ -460,10 +460,21 @@ input.scrollable-header {
 
 .yellowbar{
 	background-color:#F4CA31;
+	padding:5px 10px;
 }
 .pinkbar{
 	background-color:#D27180;
+	padding:5px 10px;
 }
 .greenbar{
 	background-color:#A1C735;
+	padding:5px 10px;
+}
+.listNextArrow{
+	float:right;
+	padding-right:10px;
+}	
+.listBackArrow{
+	float:left;
+	padding-left:10px;
 }

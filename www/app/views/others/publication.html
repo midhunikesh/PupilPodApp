@@ -1,9 +1,10 @@
-<ion-view view-title="Pupilpod">
+<ion-view view-title="Pupilpod" ng-controller="PublicationController" ng-init="fnInit()">
     <ion-content>
         <div>
 			<div class="item item-divider">
 				Publications
 			</div>
+			
 			<div class="card" ng-repeat="item in publications">
 				<div class="row row-center">
 					<div class="col col-25 text-left">{{item.published_date}}</div>

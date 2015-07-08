@@ -668,8 +668,7 @@ app.controller('EventDetailController',function($scope,PPODService,sharedPropert
 });
 
 app.controller('PublicationController',function($scope,$window,PPODService,sharedProperties,$location){
-	fnInit();
-    $scope.fnInit = function(){
+	$scope.fnInit = function(){
         $scope.loading = true;
         var promise = PPODService.getPublications();
         promise.then(function(result) {

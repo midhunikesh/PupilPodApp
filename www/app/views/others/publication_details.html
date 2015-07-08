@@ -12,8 +12,8 @@
             </div>
 			<div class="card" ng-repeat="item in publication_attachments">
 				<div class="row row-center">
-					<div class="col col-90">{{item.attach_fileName}}</div>
-					<div class="col">
+					<div class="col col-80">{{item.attach_fileName}}</div>
+					<div class="col col-20">
 						<button ng-click="downloadAttachment(item.attach_path)" class="button button-clear button-dark icon icon-right ion-paperclip" style="width:100%;"></button>
 					</div>
 				</div>

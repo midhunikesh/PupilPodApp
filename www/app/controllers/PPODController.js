@@ -668,6 +668,7 @@ app.controller('EventDetailController',function($scope,PPODService,sharedPropert
 });
 
 app.controller('PublicationController',function($scope,$window,PPODService,sharedProperties,$location){
+	fnInit();
     $scope.fnInit = function(){
         $scope.loading = true;
         var promise = PPODService.getPublications();
@@ -699,6 +700,17 @@ app.controller('PublicationDetailController',function($scope,PPODService,sharedP
         });
     }
 	$scope.downloadAttachment = function(url){
-		$window.open(url,'_blank','location=no');
-	}	
+		var remoteFile = url;
+        var localFileName = remoteFile.substring(url.lastIndexOf('/')+1);
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+            fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+                var localPath = fileEntry.fullPath;
+                if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
+                    localPath = localPath.substring(7);
+                }
+                var ft = new FileTransfer();
+                ft.download(remoteFile,localPath, function(entry) {}, fail);
+            },fail);
+        }, fail);
+    }	
 });

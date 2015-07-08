@@ -698,4 +698,7 @@ app.controller('PublicationDetailController',function($scope,PPODService,sharedP
             alert(reason);
         });
     }
+	$scope.downloadAttachment = function(url){
+		window.open(url,'_blank','location=no');
+	}	
 });

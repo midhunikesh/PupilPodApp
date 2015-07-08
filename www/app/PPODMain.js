@@ -320,7 +320,7 @@ app.service('sharedProperties', function () {
         },
         setYear: function(row){
             year = row;
-        }
+        },
 		setPublicationRow:function(_publicationRow){
             this._publicationRow = _publicationRow;
         },

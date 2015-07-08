@@ -704,8 +704,6 @@ app.controller('PublicationDetailController',function($scope,PPODService,sharedP
 			if(error == 53) {
 			  console.log('No app that handles this file type.');
 			}
-		  }, 
-		  'http://thoughtnet.pupilpod.in/files/tk12.pupilpod.in/import_uploaded_data/FirstSchool_SectionA-1.xlsx'
-		);
+		  },url);
     }	
 });

@@ -10,9 +10,14 @@
 			<div ng-if="publication_attachments.length > 0" style="margin-left: 30px;">
                 <small>Please click on the attachments to read further</small>
             </div>
-			<li class="item" ng-repeat="item in publication_attachments" style="width: 800px;">
-				<button ng-click="downloadAttachment(item.attach_path)" class="button button-small button-clear button-dark icon ion-paperclip" style="width:100%;">{{item.attach_fileName}}</button>
-			</li>
+			<div class="card" ng-repeat="item in publication_attachments">
+				<div class="row row-center">
+					<div class="col col-90">{{item.attach_fileName}}</div>
+					<div class="col">
+						<button ng-click="downloadAttachment(item.attach_path)" class="button button-small button-clear button-dark icon icon-right ion-paperclip" style="width:100%;"></button>
+					</div>
+				</div>
+			</div>
 		</div>
        <div ng-show="loading">
 			<div style="text-align:center;">

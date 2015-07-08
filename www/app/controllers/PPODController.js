@@ -685,7 +685,7 @@ app.controller('PublicationController',function($scope,$window,PPODService,share
         $location.path("/eventmenu/publication_details");
     }
 });
-app.controller('PublicationDetailController',function($scope,PPODService,sharedProperties){
+app.controller('PublicationDetailController',function($scope,PPODService,sharedProperties,$window){
     fnInit();
     function fnInit(){
         var promise = PPODService.getPublicationDetails(sharedProperties.getPublicationRow());
@@ -699,6 +699,6 @@ app.controller('PublicationDetailController',function($scope,PPODService,sharedP
         });
     }
 	$scope.downloadAttachment = function(url){
-		window.open(url,'_blank','location=no');
+		$window.open(url,'_blank','location=no');
 	}	
 });
